@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Defines the document type as HTML5 and specifies the Thymeleaf namespace for attribute-based templating -->
+<head>
+    <title>Result</title> <!-- Sets the title of the page as "Result" which appears in the browser tab -->
+</head>
+<body> <!-- Begins the main content section of the HTML document -->
+
+
+<h2>User Details</h2> <!-- Heading displaying "User Details" as a title for the user information section -->
+
+
+<p>First Name: <span th:text="${user.firstName}"></span></p>
+<!-- Displays the user's first name:
+    - The <p> tag creates a paragraph
+    - The <span> tag displays the value of "user.firstName" (from the server) using Thymeleaf's th:text attribute
+    - "${user.firstName}" is a placeholder for the actual first name value from the "user" object in the model -->
+
+
+<p>Last Name: <span th:text="${user.lastName}"></span></p>
+<!-- Displays the user's last name:
+    - The <p> tag creates a paragraph
+    - The <span> tag displays the value of "user.lastName" using Thymeleaf's th:text attribute
+    - "${user.lastName}" is a placeholder for the actual last name value from the "user" object in the model -->
+
+
+<p>Email: <span th:text="${user.email}"></span></p>
+<!-- Displays the user's email:
+    - The <p> tag creates a paragraph
+    - The <span> tag displays the value of "user.email" using Thymeleaf's th:text attribute
+    - "${user.email}" is a placeholder for the actual email value from the "user" object in the model -->
+
+
+<a href="/">Back to Home</a> <!-- Creates a hyperlink that navigates back to the homepage ("/") -->
+
+
+</body>
+</html>

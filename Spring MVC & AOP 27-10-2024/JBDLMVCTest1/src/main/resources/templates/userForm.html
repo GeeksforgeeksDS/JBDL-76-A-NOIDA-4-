@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Declares the document type as HTML5 and defines the Thymeleaf namespace for templating support -->
+<head>
+    <title>User Form</title> <!-- Sets the title of the page to "User Form" which appears in the browser tab -->
+</head>
+<body> <!-- Begins the main content section of the HTML document -->
+
+
+<h2>User Registration Form</h2> <!-- Heading displaying "User Registration Form" to indicate the purpose of the form -->
+
+
+<form action="/submitForm" method="post" th:object="${user}">
+    <!-- Form tag:
+         - action="/submitForm" specifies the endpoint where form data will be sent on submission
+         - method="post" indicates the form data will be sent via POST request
+         - th:object="${user}" binds the form to the "user" object in the model to allow data binding in fields -->
+
+
+    <label for="firstName">First Name:</label> <!-- Label for the first name input, linked with input ID "firstName" -->
+    <input type="text" id="firstName" th:field="*{firstName}"><br><br>
+    <!-- Input field for the user's first name:
+         - type="text" specifies a text input
+         - id="firstName" links this input to the above label
+         - th:field="*{firstName}" binds this field to the "firstName" attribute of the "user" object in the model
+         - <br><br> adds spacing after the input field -->
+
+
+    <label for="lastName">Last Name:</label> <!-- Label for the last name input, linked with input ID "lastName" -->
+    <input type="text" id="lastName" th:field="*{lastName}"><br><br>
+    <!-- Input field for the user's last name:
+         - type="text" specifies a text input
+         - id="lastName" links this input to the above label
+         - th:field="*{lastName}" binds this field to the "lastName" attribute of the "user" object in the model
+         - <br><br> adds spacing after the input field -->
+
+
+    <label for="email">Email:</label> <!-- Label for the email input, linked with input ID "email" -->
+    <input type="email" id="email" th:field="*{email}"><br><br>
+    <!-- Input field for the user's email:
+         - type="email" specifies an email input to validate email format
+         - id="email" links this input to the above label
+         - th:field="*{email}" binds this field to the "email" attribute of the "user" object in the model
+         - <br><br> adds spacing after the input field -->
+
+
+    <button type="submit">Submit</button> <!-- Submit button to send the form data to the server -->
+</form> <!-- Ends the form section -->
+
+
+</body>
+</html>
+
