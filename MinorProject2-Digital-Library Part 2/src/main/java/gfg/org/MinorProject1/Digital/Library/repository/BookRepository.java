@@ -1,0 +1,24 @@
+package gfg.org.MinorProject1.Digital.Library.repository;
+
+import gfg.org.MinorProject1.Digital.Library.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface BookRepository extends JpaRepository<Book, Integer> {
+    List<Book> findByBookName(String value);
+
+    List<Book> findByBookNo(String value);
+
+    List<Book> findByCost(int i);
+
+    List<Book> findByPages(int i);
+
+    List<Book> findByCostGreaterThan(int i);
+
+    List<Book> findByPagesGreaterThan(int i);
+
+    List<Book> findByCostLessThan(int i);
+
+    List<Book> findByPagesLessThan(int i);
+}
