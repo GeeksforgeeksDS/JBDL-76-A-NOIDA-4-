@@ -1,0 +1,62 @@
+package gfg.org.MinorProject1.Digital.Library.controller;
+
+import gfg.org.MinorProject1.Digital.Library.dto.CreateStudentRequest;
+import gfg.org.MinorProject1.Digital.Library.enumsofdigitallibrary.FilterStudentBy;
+import gfg.org.MinorProject1.Digital.Library.enumsofdigitallibrary.Operator;
+import gfg.org.MinorProject1.Digital.Library.model.Student;
+import gfg.org.MinorProject1.Digital.Library.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/student")
+public class StudentController {
+
+    @Autowired
+    private StudentService studentService;
+
+    @PostMapping("/create")
+    public ResponseEntity<Student> createStudent(@RequestBody CreateStudentRequest createStudentRequest) {
+        return ResponseEntity.ok(studentService.createStudent(createStudentRequest));
+    }
+
+    @GetMapping("/get/{studentId}")
+    public ResponseEntity<Student> getStudent(@PathVariable String studentId) {
+        return ResponseEntity.ok(studentService.getStudent(studentId));
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable int id, Authentication authentication){
+       // logger.info("Fetching Student with Id : " + id);
+        Student student = studentService.getStudentById(id, authentication.getName());
+
+        if(student==null)
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized to access the Resource");
+
+        return ResponseEntity.ok(student);
+    }
+
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Student>> getAllStudent() {
+        return ResponseEntity.ok(studentService.getAllStudent());
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable int id,@RequestBody CreateStudentRequest createStudentRequest) {
+        return ResponseEntity.ok(studentService.updateStudent(id,createStudentRequest));
+    }
+
+    @GetMapping("/filter/{operator}/{filterStudentBy}/{value}")
+    public ResponseEntity<List<Student>> filterStudent(@PathVariable Operator operator, @PathVariable FilterStudentBy filterStudentBy, @PathVariable String value){
+        return ResponseEntity.ok(studentService.filterStudent(operator,filterStudentBy,value));
+    }
+
+
+}
